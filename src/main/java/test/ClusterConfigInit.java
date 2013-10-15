@@ -9,6 +9,7 @@ import org.apache.helix.model.StateModelDefinition;
 public class ClusterConfigInit {
 
     
+    private static final String DROPPED = "DROPPED";
     private static final String RESOURCE = "MY_RESOURCE";
     private static final int PARTITIONS = 3;
     public static String LEADER = "LEADER";
@@ -36,7 +37,7 @@ public class ClusterConfigInit {
                 "LEADER_REPLICA",
                 RebalanceMode.FULL_AUTO.toString());
 
-        admin.rebalance(DEFAULT_CLUSTER_NAME, RESOURCE, 1);
+        admin.rebalance(DEFAULT_CLUSTER_NAME, RESOURCE, 2);
     }
 
        
@@ -49,6 +50,7 @@ public class ClusterConfigInit {
             builder.addState(LEADER, 1);
             builder.addState(REPLICA, 2);
             builder.addState(OFFLINE);
+            builder.addState(DROPPED);
             // Set the initial state when the node starts
             builder.initialState(OFFLINE);
 
@@ -57,9 +59,9 @@ public class ClusterConfigInit {
             builder.addTransition(REPLICA, OFFLINE);
             builder.addTransition(REPLICA, LEADER);
             builder.addTransition(LEADER, OFFLINE);
-            builder.addTransition(REPLICA, "DROPPED");
-            builder.addTransition(LEADER, "DROPPED");
-            builder.addTransition(OFFLINE, "DROPPED");
+            builder.addTransition(REPLICA, DROPPED);
+            builder.addTransition(LEADER, DROPPED);
+            builder.addTransition(OFFLINE, DROPPED);
 
             // set constraints on states.
             // static constraint
