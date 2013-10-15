@@ -3,6 +3,7 @@ package test;
 
 import org.apache.helix.manager.zk.ZKHelixAdmin;
 import org.apache.helix.model.IdealState.IdealStateModeProperty;
+import org.apache.helix.model.IdealState.RebalanceMode;
 import org.apache.helix.model.StateModelDefinition;
 
 public class ClusterConfigInit {
@@ -33,7 +34,7 @@ public class ClusterConfigInit {
                 RESOURCE, 
                 PARTITIONS,
                 "LEADER_REPLICA",
-                IdealStateModeProperty.AUTO_REBALANCE.toString());
+                RebalanceMode.FULL_AUTO.toString());
 
         admin.rebalance(DEFAULT_CLUSTER_NAME, RESOURCE, 1);
     }
