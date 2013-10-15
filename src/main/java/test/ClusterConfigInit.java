@@ -59,6 +59,7 @@ public class ClusterConfigInit {
             builder.addTransition(LEADER, OFFLINE);
             builder.addTransition(REPLICA, "DROPPED");
             builder.addTransition(LEADER, "DROPPED");
+            builder.addTransition(OFFLINE, "DROPPED");
 
             // set constraints on states.
             // static constraint

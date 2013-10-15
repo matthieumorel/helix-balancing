@@ -45,9 +45,13 @@ public class TestRebalancing {
                 node.start();
                 Thread.sleep(2000);
             }
-
+            
             // stop 1 node
             nodes.iterator().next().stop();
+            
+            Thread.sleep(2000);
+            
+            nodes.listIterator(1).next().stop();
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

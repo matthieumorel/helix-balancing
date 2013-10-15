@@ -60,6 +60,11 @@ public class LeaderReplicaStateModelFactory extends StateModelFactory<StateModel
         public void onBecomeDroppedFromReplica(Message message, NotificationContext context) {
             System.out.println(String.format("REPLICA -> DROPPED (%s, %s)", new Object[] { name, partition }));
         }
+        
+        @Transition(from = OFFLINE, to = DROPPED)
+        public void onBecomeDroppedFromOffline(Message message, NotificationContext context) {
+            System.out.println(String.format("OFFLINE -> DROPPED (%s, %s)", new Object[] { name, partition }));
+        }
 
     }
 }
